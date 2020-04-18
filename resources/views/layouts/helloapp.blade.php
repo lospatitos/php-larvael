@@ -1,5 +1,7 @@
 <html>
     <head>
+        {{-- <link rel="stylesheet" type="text/scss" href="/css/app.css"> --}}
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <title>
         @yield('title')
         </title>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\HelloRequest;
+use App\Person;
 use Illuminate\Http\Request;
 
 use Illuminate\Http\Response;
@@ -14,8 +15,11 @@ class HelloController extends Controller
 
     public function index(Request $request)
     {
-        $items = DB::table('people')->orderBy('age', 'asc')->get();
-        return view('hello.index', ['items' => $items]);
+        $sort = $request->sort;
+        $items = Person::orderBy($sort, 'asc')
+            ->paginate(5);
+        $param = ['items' => $items, 'sort' => $sort];
+        return view('hello.index', $param);
     }
 
     public function post(Request $request)
